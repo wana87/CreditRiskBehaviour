@@ -16,9 +16,11 @@ python -m streamlit run app.py
 
 The bundled demo runs automatically. Select a borrower report to inspect the summary, payment windows, facilities, graph, and complete feature output. You can also upload JSON/JSONL or paste a report, then click **Run profiler**. Export selected/all results as JSON, or the scalar features as CSV.
 
+The refreshed dashboard includes a blue gradient header, icon-led metric cards and tabs, a borrower identity section, historical observation summaries, interactive payment-window comparisons, a monthly timeline, and a facility-exposure chart. Teal identifies months with no overdue days, while amber identifies months with overdue days reported. Colours describe historical observations, not predicted credit ratings.
+
 ## Deploy to Streamlit Community Cloud
 
-1. Extract the ZIP and upload the contents of this project directory to a GitHub repository. Include `app.py`, `engine.py`, `requirements.txt`, `config/`, and `data/`.
+1. Extract the ZIP and upload the entire contents of this project directory to a GitHub repository. Include `app.py`, `ui.py`, `styles.css`, `engine.py`, `requirements.txt`, `.streamlit/`, `config/`, and `data/`. The hidden `.streamlit/` directory supplies the light dashboard theme.
 2. In Streamlit Community Cloud, create an app and select that repository and branch.
 3. Set the main file path to `app.py` (or the relative path to it if you used a subfolder).
 4. Under advanced settings, select Python 3.12 and deploy.
@@ -63,7 +65,7 @@ Tests compare all five supplied reports against independent Python reference cal
 
 All 11 tests passed on Python 3.12.14 with the pinned dependencies in `requirements.txt`. The UI tests render the five demo reports, switch between them, process pasted JSON, and check validation feedback. A browser preview was also checked locally. Generated outputs for the supplied data are included in `data/demo-results.json`.
 
-`app.py` is the UI; `engine.py` can also be imported independently:
+`app.py` orchestrates the UI, `ui.py` provides presentation helpers and interactive charts, and `styles.css` plus `.streamlit/config.toml` define the visual theme. `engine.py` remains independent of presentation and can also be imported directly:
 
 ```python
 from engine import load_config, parse_records, profile

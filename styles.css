@@ -1,0 +1,46 @@
+/* Streamlit 1.66 theme enhancements. Keyed containers keep styling scoped. */
+.stMainBlockContainer { padding-top: 4.75rem; padding-bottom: 3rem; max-width: 1480px; }
+.profile-hero {
+  background: linear-gradient(115deg, #142c57 0%, #244baa 64%, #157b92 100%);
+  color: #fff; padding: 2.25rem 2.5rem; border-radius: 22px;
+  box-shadow: 0 12px 32px rgba(26, 57, 110, .12); margin-bottom: .8rem;
+}
+.profile-hero .hero-eyebrow { color: #bfe7f4; font-size: .76rem; letter-spacing: .16em; font-weight: 700; text-transform: uppercase; }
+.profile-hero h1 { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.7rem); letter-spacing: -.035em; padding: .45rem 0 .4rem; margin: 0; font-weight: 750; line-height: 1.15; }
+.profile-hero p { color: #e1eafa; max-width: 760px; margin: .25rem 0 0; font-size: 1rem; line-height: 1.7; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }
+.hero-pills span { border: 1px solid #ffffff3b; border-radius: 999px; padding: .3rem .7rem; background: #ffffff0b; color: #e7f6ff; font-size: .78rem; }
+.sidebar-brand { font-size: 1.25rem; font-weight: 800; color: #17345f; letter-spacing: -.04em; margin: .25rem 0; }
+.sidebar-caption { color: #5c7088; font-size: .84rem; line-height: 1.65; margin: .5rem 0 1.25rem; }
+.borrower-heading { display: flex; align-items: center; gap: .9rem; padding: .25rem 0 1.25rem; }
+.borrower-avatar { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: #e7edf9; color: #3152a0; font-size: 1.25rem; font-weight: 800; flex-shrink: 0; }
+.borrower-heading h2 { font-size: 1.22rem; margin: 0 0 .3rem; padding: 0; color: #17345f; line-height: 1.35; }
+.borrower-heading p { color: #63758b; font-size: .8rem; margin: 0; line-height: 1.6; }
+.st-key-kpi-reported [data-testid="stMetric"] { border-top: 3px solid #4266c5; }
+.st-key-kpi-active [data-testid="stMetric"] { border-top: 3px solid #118b8b; }
+.st-key-kpi-outstanding [data-testid="stMetric"] { border-top: 3px solid #7362b8; }
+.st-key-kpi-dpd [data-testid="stMetric"] { border-top: 3px solid #d79327; }
+.st-key-metric-row [data-testid="stMetric"] { background: #fff; border-radius: 15px; padding: 1.15rem; box-shadow: 0 3px 14px #17345f05; height: 100%; }
+.st-key-metric-row [data-testid="stMetricValue"] { font-size: clamp(1.45rem, 2.15vw, 2rem); font-weight: 750; letter-spacing: -.035em; }
+.st-key-metric-row [data-testid="stMetricLabel"] { color: #60718a; font-size: .85rem; }
+.st-key-metric-row [data-testid="stMetricLabel"] p { white-space: normal; overflow: visible; text-overflow: clip; font-size: .8rem; line-height: 1.4; }
+.st-key-borrower-select { margin: .65rem 0 .25rem; }
+[data-testid="stTabs"] { margin-top: 1.5rem; }
+[data-testid="stTabs"] [role="tablist"] { gap: 1.25rem; }
+[data-testid="stTabs"] [role="tab"] { font-weight: 600; padding-bottom: .9rem; }
+.observation { padding: .85rem 0; border-bottom: 1px solid #e8edf5; }
+.observation:last-child { border-bottom: none; }
+.observation .obs-label { color: #60718a; font-size: .78rem; margin-bottom: .3rem; }
+.observation .obs-value { color: #203c5e; font-weight: 700; font-size: 1.05rem; }
+.observation .obs-detail { color: #677a91; font-size: .8rem; margin-top: .3rem; line-height: 1.55; }
+.mini-summary { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; padding: .5rem 0; }
+.mini-summary div { padding: .65rem 0; }
+.mini-summary strong { display: block; font-size: 1.5rem; color: #17345f; }
+.mini-summary span { font-size: .78rem; color: #60718a; }
+.app-footer { color: #7c8a9e; font-size: .75rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e6ebf2; }
+@media (max-width: 640px) {
+  .stMainBlockContainer { padding-top: 4.25rem; }
+  .profile-hero { padding: 1.5rem; border-radius: 16px; }
+  .hero-pills { gap: .35rem; }
+  .borrower-heading h2 { font-size: 1.05rem; }
+}
