@@ -1,0 +1,5 @@
+streamlit==1.66.1
+PyYAML==6.0.3
+lupa==2.8
+pandas==2.3.3
+graphviz==0.21
