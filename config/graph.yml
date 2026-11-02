@@ -1,0 +1,52 @@
+# Borrower vertex - keyed on borrower_id
+- type: vertex
+  label: Borrower
+  ids:
+    - borrower.id
+  properties:
+    - type: string
+      key: borrower_id
+      value: borrower.id
+    - type: string
+      key: display_name
+      value: borrower.display_name
+    - type: timestamp
+      key: timestamp
+      value: transaction.date
+    - type: string
+      key: query_id
+      value: _query_id
+# Report vertex - keyed on transaction.id
+- type: vertex
+  label: Report
+  ids:
+    - transaction.id
+    - transaction.date
+  properties:
+    - type: string
+      key: report_id
+      value: transaction.id
+    - type: timestamp
+      key: timestamp
+      value: transaction.date
+    - type: string
+      key: analysis_period
+      value: report.analysis_period
+    - type: string
+      key: query_id
+      value: _query_id
+# Edge from Borrower to Report
+- type: edge
+  label: SUBMITTED
+  from_vertex_ids:
+    - borrower.id
+  to_vertex_ids:
+    - transaction.id
+    - transaction.date
+  properties:
+    - type: timestamp
+      key: timestamp
+      value: transaction.date
+    - type: string
+      key: query_id
+      value: _query_id

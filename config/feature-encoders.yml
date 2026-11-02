@@ -1,0 +1,504 @@
+# ---------------------------------------------------------------------------
+# SNAPSHOT FEATURES
+# ---------------------------------------------------------------------------
+- input: facility.id
+  output: reported_facility_count
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      ids = in.$1
+      if ids == nil then
+        out.$1 = 0
+      else
+        out.$1 = #ids
+      end
+- input: facility.condition
+  output: active_facility_count
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      conditions = in.$1
+      cnt = 0
+      if conditions ~= nil then
+        for i = 1, #conditions do
+          if conditions[i] == "ACTIVE" then
+            cnt = cnt + 1
+          end
+        end
+      end
+      out.$1 = cnt
+- input: [ facility.condition, facility.lender_code ]
+  output: active_lender_count
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      conditions = in.$1
+      codes = in.$2
+      seen = {}
+      cnt = 0
+      if conditions ~= nil then
+        for i = 1, #conditions do
+          if conditions[i] == "ACTIVE" then
+            code = codes[i]
+            if code ~= nil and seen[code] == nil then
+              seen[code] = true
+              cnt = cnt + 1
+            end
+          end
+        end
+      end
+      out.$1 = cnt
+- input: facility.outstanding_principal
+  output: total_outstanding_idr
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      principals = in.$1
+      total = 0
+      if principals ~= nil then
+        for i = 1, #principals do
+          if principals[i] ~= nil then
+            total = total + principals[i]
+          end
+        end
+      end
+      out.$1 = total
+- input: [ facility.condition, facility.restructuring_count ]
+  output: active_restructured_facility_count
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      conditions = in.$1
+      restructures = in.$2
+      cnt = 0
+      if conditions ~= nil then
+        for i = 1, #conditions do
+          if conditions[i] == "ACTIVE" then
+            rc = restructures[i]
+            if rc ~= nil and rc > 0 then
+              cnt = cnt + 1
+            end
+          end
+        end
+      end
+      out.$1 = cnt
+- input: [ facility.credit_start_date, report.analysis_period ]
+  output: new_facility_count_3m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      starts   = in.$1
+      analysis = in.$2
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win3_start_ym = ap_ym - 2
+      cnt = 0
+      if starts ~= nil then
+        for i = 1, #starts do
+          sd = starts[i]
+          if sd ~= nil then
+            sd_year  = tonumber(string.sub(sd, 1, 4))
+            sd_month = tonumber(string.sub(sd, 6, 7))
+            sd_ym    = sd_year * 12 + (sd_month - 1)
+            if sd_ym >= win3_start_ym and sd_ym <= ap_ym then
+              cnt = cnt + 1
+            end
+          end
+        end
+      end
+      out.$1 = cnt
+# ---------------------------------------------------------------------------
+# PAYMENT HISTORY WINDOW FEATURES
+# One encoder per output metric.
+# All use integer ym = year*12 + (month-1) for range checks.
+# Only REPORTED slots included; NOT_APPLICABLE_* excluded.
+# ---------------------------------------------------------------------------
+- input: [ payment.period, payment.days_past_due, payment.observation_status, report.analysis_period ]
+  output: max_dpd_3m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      dpds     = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 2
+      result = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            dpd = dpds[i]
+            if dpd == nil then dpd = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if dpd > result then result = dpd end
+            end
+          end
+        end
+      end
+      out.$1 = result
+- input: [ payment.period, payment.days_past_due, payment.observation_status, report.analysis_period ]
+  output: max_dpd_12m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      dpds     = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 11
+      result = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            dpd = dpds[i]
+            if dpd == nil then dpd = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if dpd > result then result = dpd end
+            end
+          end
+        end
+      end
+      out.$1 = result
+- input: [ payment.period, payment.days_past_due, payment.observation_status, report.analysis_period ]
+  output: max_dpd_24m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      dpds     = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 23
+      result = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            dpd = dpds[i]
+            if dpd == nil then dpd = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if dpd > result then result = dpd end
+            end
+          end
+        end
+      end
+      out.$1 = result
+- input: [ payment.period, payment.collectibility, payment.observation_status, report.analysis_period ]
+  output: worst_collectibility_3m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      colls    = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 2
+      result = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            col = colls[i]
+            if col == nil then col = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if col > result then result = col end
+            end
+          end
+        end
+      end
+      out.$1 = result
+- input: [ payment.period, payment.collectibility, payment.observation_status, report.analysis_period ]
+  output: worst_collectibility_12m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      colls    = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 11
+      result = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            col = colls[i]
+            if col == nil then col = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if col > result then result = col end
+            end
+          end
+        end
+      end
+      out.$1 = result
+- input: [ payment.period, payment.collectibility, payment.observation_status, report.analysis_period ]
+  output: worst_collectibility_24m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      colls    = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 23
+      result = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            col = colls[i]
+            if col == nil then col = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if col > result then result = col end
+            end
+          end
+        end
+      end
+      out.$1 = result
+- input: [ payment.period, payment.days_past_due, payment.observation_status, report.analysis_period ]
+  output: delinquent_slot_count_12m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      dpds     = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 11
+      cnt = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            dpd = dpds[i]
+            if dpd == nil then dpd = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if dpd > 0 then cnt = cnt + 1 end
+            end
+          end
+        end
+      end
+      out.$1 = cnt
+- input: [ payment.period, payment.days_past_due, payment.observation_status, report.analysis_period ]
+  output: delinquent_slot_count_24m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      dpds     = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 23
+      cnt = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            dpd = dpds[i]
+            if dpd == nil then dpd = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if dpd > 0 then cnt = cnt + 1 end
+            end
+          end
+        end
+      end
+      out.$1 = cnt
+- input: [ payment.period, payment.observation_status, report.analysis_period ]
+  output: reported_slot_count_12m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      statuses = in.$2
+      analysis = in.$3
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 11
+      cnt = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              cnt = cnt + 1
+            end
+          end
+        end
+      end
+      out.$1 = cnt
+- input: [ payment.period, payment.observation_status, report.analysis_period ]
+  output: reported_slot_count_24m
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      statuses = in.$2
+      analysis = in.$3
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 23
+      cnt = 0
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              cnt = cnt + 1
+            end
+          end
+        end
+      end
+      out.$1 = cnt
+- input: [ payment.period, payment.days_past_due, payment.observation_status, report.analysis_period ]
+  output: months_since_last_delinquency
+  default-value: <NaN>
+  complex-params: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      periods  = in.$1
+      dpds     = in.$2
+      statuses = in.$3
+      analysis = in.$4
+      ap_year  = tonumber(string.sub(analysis, 1, 4))
+      ap_month = tonumber(string.sub(analysis, 6, 7))
+      ap_ym    = ap_year * 12 + (ap_month - 1)
+      win_start = ap_ym - 23
+      last_delinq_ym = nil
+      if periods ~= nil then
+        for i = 1, #periods do
+          p  = periods[i]
+          st = statuses[i]
+          if st == "REPORTED" and p ~= nil then
+            dpd = dpds[i]
+            if dpd == nil then dpd = 0 end
+            p_year  = tonumber(string.sub(p, 1, 4))
+            p_month = tonumber(string.sub(p, 6, 7))
+            p_ym    = p_year * 12 + (p_month - 1)
+            if p_ym >= win_start and p_ym <= ap_ym then
+              if dpd > 0 then
+                if last_delinq_ym == nil or p_ym > last_delinq_ym then
+                  last_delinq_ym = p_ym
+                end
+              end
+            end
+          end
+        end
+      end
+      if last_delinq_ym == nil then
+        out.$1 = nil
+      else
+        out.$1 = ap_ym - last_delinq_ym
+      end
+# ---------------------------------------------------------------------------
+# DERIVED RATE FEATURES
+# ---------------------------------------------------------------------------
+- input: [ delinquent_slot_count_12m, reported_slot_count_12m ]
+  output: delinquency_rate_12m
+  default-value: <NaN>
+  encoding:
+    type: expression-encoding
+    expression: |
+      denom = in.$2
+      if denom == nil or denom == 0 then
+        out.$1 = nil
+      else
+        out.$1 = in.$1 / denom
+      end
+- input: [ delinquent_slot_count_24m, reported_slot_count_24m ]
+  output: delinquency_rate_24m
+  default-value: <NaN>
+  encoding:
+    type: expression-encoding
+    expression: |
+      denom = in.$2
+      if denom == nil or denom == 0 then
+        out.$1 = nil
+      else
+        out.$1 = in.$1 / denom
+      end

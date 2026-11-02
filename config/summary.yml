@@ -1,0 +1,20 @@
+- label: 'Transaction Id'
+  path: $.features.['transaction.id']
+- label: 'Transaction Date'
+  path: $.features.['transaction.date']
+- label: 'Reported Facility Count'
+  path: $.features.reported_facility_count
+- label: 'Active Facility Count'
+  path: $.features.active_facility_count
+- label: 'Total Outstanding IDR'
+  path: $.features.total_outstanding_idr
+- label: 'Max DPD 24m'
+  path: $.features.max_dpd_24m
+- label: 'Worst Collectibility 24m'
+  path: $.features.worst_collectibility_24m
+- label: 'Delinquent Slot Count 24m'
+  path: $.features.delinquent_slot_count_24m
+- label: 'Delinquency Rate 24m'
+  path: $.features.delinquency_rate_24m
+- label: 'Months Since Last Delinquency'
+  path: $.features.months_since_last_delinquency

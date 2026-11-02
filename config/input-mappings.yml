@@ -1,0 +1,103 @@
+# Unique transaction/report ID
+- dataset: input
+  input: $.transaction.id
+  output: transaction.id
+  required: true
+  type: STRING
+# Transaction/report date - mapped to transaction.created, normalised to transaction.date in pre-processing
+- dataset: input
+  input: $.transaction.date
+  output: transaction.created
+  type: STRING
+# Borrower ID
+- dataset: input
+  input: $.borrower.borrower_id
+  output: borrower.id
+  required: true
+  type: STRING
+# Borrower display name
+- dataset: input
+  input: $.borrower.display_name
+  output: borrower.display_name
+  type: STRING
+# Analysis reporting period (e.g. "2026-03")
+- dataset: input
+  input: $.analysis_reporting_period
+  output: report.analysis_period
+  required: true
+  type: STRING
+# History start period
+- dataset: input
+  input: $.report.history_start_period
+  output: report.history_start
+  type: STRING
+# History end period
+- dataset: input
+  input: $.report.history_end_period
+  output: report.history_end
+  type: STRING
+# Array of facility IDs
+- dataset: input
+  input: $.facilities..facility_id
+  output: facility.id
+  type: STRING
+# Array of facility condition_normalized values
+- dataset: input
+  input: $.facilities..latest_position.condition_normalized
+  output: facility.condition
+  type: STRING
+# Array of facility outstanding principal values
+- dataset: input
+  input: $.facilities..latest_position.outstanding_principal
+  output: facility.outstanding_principal
+  type: NUMBER
+# Array of facility credit limits
+- dataset: input
+  input: $.facilities..latest_position.credit_limit
+  output: facility.credit_limit
+  type: NUMBER
+# Array of facility collectibility (latest position)
+- dataset: input
+  input: $.facilities..latest_position.collectibility
+  output: facility.collectibility
+  type: NUMBER
+# Array of facility days_past_due (latest position)
+- dataset: input
+  input: $.facilities..latest_position.days_past_due
+  output: facility.days_past_due
+  type: NUMBER
+# Array of facility restructuring counts
+- dataset: input
+  input: $.facilities..latest_position.restructuring_count
+  output: facility.restructuring_count
+  type: NUMBER
+# Array of facility credit start dates
+- dataset: input
+  input: $.facilities..credit_start_date
+  output: facility.credit_start_date
+  type: STRING
+# Array of reporting institution codes (one per facility)
+- dataset: input
+  input: $.facilities..reporting_institution.code
+  output: facility.lender_code
+  type: STRING
+# Flattened array of all payment history periods across all facilities
+- dataset: input
+  input: $.facilities..payment_history_24m..period
+  output: payment.period
+  type: STRING
+# Flattened array of all payment history collectibility values
+- dataset: input
+  input: $.facilities..payment_history_24m..collectibility
+  output: payment.collectibility
+  type: NUMBER
+# Flattened array of all payment history days_past_due values
+- dataset: input
+  input: $.facilities..payment_history_24m..days_past_due
+  output: payment.days_past_due
+  type: NUMBER
+# Flattened array of all payment history observation_status values
+- dataset: input
+  input: $.facilities..payment_history_24m..observation_status
+  output: payment.observation_status
+  type: STRING

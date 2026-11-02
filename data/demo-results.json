@@ -1,0 +1,1562 @@
+[
+  {
+    "features": {
+      "transaction.id": "DEMO-REPORT-001",
+      "transaction.created": "2026-04-15T00:00:00Z",
+      "borrower.id": "DEMO-BORROWER-001",
+      "borrower.display_name": "Synthetic Borrower Alpha",
+      "report.analysis_period": "2026-03",
+      "report.history_start": "2024-04",
+      "report.history_end": "2026-03",
+      "facility.id": [
+        "DEMO-FAC-001",
+        "DEMO-FAC-002",
+        "DEMO-FAC-003"
+      ],
+      "facility.condition": [
+        "ACTIVE",
+        "ACTIVE",
+        "CLOSED_PAID"
+      ],
+      "facility.outstanding_principal": [
+        7000000,
+        9000000,
+        0
+      ],
+      "facility.credit_limit": [
+        15000000,
+        20000000,
+        0
+      ],
+      "facility.collectibility": [
+        1,
+        2,
+        1
+      ],
+      "facility.days_past_due": [
+        0,
+        15,
+        0
+      ],
+      "facility.restructuring_count": [
+        0,
+        0,
+        0
+      ],
+      "facility.credit_start_date": [
+        "2023-01-01",
+        "2024-04-01",
+        "2025-01-01"
+      ],
+      "facility.lender_code": [
+        "DEMO-LENDER-1",
+        "DEMO-LENDER-2",
+        "DEMO-LENDER-3"
+      ],
+      "payment.period": [
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03"
+      ],
+      "payment.collectibility": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null
+      ],
+      "payment.days_past_due": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        35,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        15,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "payment.observation_status": [
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "NOT_APPLICABLE_AFTER_CLOSURE"
+      ],
+      "transaction.date": "2026-04-15T00:00:00Z",
+      "reported_facility_count": 3,
+      "active_facility_count": 2,
+      "active_lender_count": 2,
+      "total_outstanding_idr": 16000000,
+      "active_restructured_facility_count": 0,
+      "new_facility_count_3m": 0,
+      "max_dpd_3m": 15,
+      "max_dpd_12m": 35,
+      "max_dpd_24m": 35,
+      "worst_collectibility_3m": 2,
+      "worst_collectibility_12m": 2,
+      "worst_collectibility_24m": 2,
+      "delinquent_slot_count_12m": 3,
+      "delinquent_slot_count_24m": 3,
+      "reported_slot_count_12m": 35,
+      "reported_slot_count_24m": 62,
+      "months_since_last_delinquency": 0,
+      "delinquency_rate_12m": 0.08571428571428572,
+      "delinquency_rate_24m": 0.04838709677419355
+    },
+    "graph": {
+      "vertices": [
+        {
+          "label": "Borrower",
+          "properties": {
+            "borrower_id": "DEMO-BORROWER-001",
+            "display_name": "Synthetic Borrower Alpha",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-001"
+          },
+          "ids": [
+            "DEMO-BORROWER-001"
+          ]
+        },
+        {
+          "label": "Report",
+          "properties": {
+            "report_id": "DEMO-REPORT-001",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "analysis_period": "2026-03",
+            "query_id": "DEMO-REPORT-001"
+          },
+          "ids": [
+            "DEMO-REPORT-001",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "label": "SUBMITTED",
+          "properties": {
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-001"
+          },
+          "from_ids": [
+            "DEMO-BORROWER-001"
+          ],
+          "to_ids": [
+            "DEMO-REPORT-001",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ]
+    },
+    "summary": [
+      {
+        "label": "Transaction Id",
+        "value": "DEMO-REPORT-001"
+      },
+      {
+        "label": "Transaction Date",
+        "value": "2026-04-15T00:00:00Z"
+      },
+      {
+        "label": "Reported Facility Count",
+        "value": 3
+      },
+      {
+        "label": "Active Facility Count",
+        "value": 2
+      },
+      {
+        "label": "Total Outstanding IDR",
+        "value": 16000000
+      },
+      {
+        "label": "Max DPD 24m",
+        "value": 35
+      },
+      {
+        "label": "Worst Collectibility 24m",
+        "value": 2
+      },
+      {
+        "label": "Delinquent Slot Count 24m",
+        "value": 3
+      },
+      {
+        "label": "Delinquency Rate 24m",
+        "value": 0.04838709677419355
+      },
+      {
+        "label": "Months Since Last Delinquency",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "features": {
+      "transaction.id": "DEMO-REPORT-002",
+      "transaction.created": "2026-04-15T00:00:00Z",
+      "borrower.id": "DEMO-BORROWER-002",
+      "borrower.display_name": "Synthetic Borrower Beta - Clean",
+      "report.analysis_period": "2026-03",
+      "report.history_start": "2024-04",
+      "report.history_end": "2026-03",
+      "facility.id": [
+        "DEMO-FAC-004"
+      ],
+      "facility.condition": [
+        "ACTIVE"
+      ],
+      "facility.outstanding_principal": [
+        5000000
+      ],
+      "facility.credit_limit": [
+        25000000
+      ],
+      "facility.collectibility": [
+        1
+      ],
+      "facility.days_past_due": [
+        0
+      ],
+      "facility.restructuring_count": [
+        0
+      ],
+      "facility.credit_start_date": [
+        "2022-06-01"
+      ],
+      "facility.lender_code": [
+        "DEMO-LENDER-1"
+      ],
+      "payment.period": [
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03"
+      ],
+      "payment.collectibility": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "payment.days_past_due": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "payment.observation_status": [
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED"
+      ],
+      "transaction.date": "2026-04-15T00:00:00Z",
+      "reported_facility_count": 1,
+      "active_facility_count": 1,
+      "active_lender_count": 1,
+      "total_outstanding_idr": 5000000,
+      "active_restructured_facility_count": 0,
+      "new_facility_count_3m": 0,
+      "max_dpd_3m": 0,
+      "max_dpd_12m": 0,
+      "max_dpd_24m": 0,
+      "worst_collectibility_3m": 1,
+      "worst_collectibility_12m": 1,
+      "worst_collectibility_24m": 1,
+      "delinquent_slot_count_12m": 0,
+      "delinquent_slot_count_24m": 0,
+      "reported_slot_count_12m": 12,
+      "reported_slot_count_24m": 24,
+      "months_since_last_delinquency": null,
+      "delinquency_rate_12m": 0.0,
+      "delinquency_rate_24m": 0.0
+    },
+    "graph": {
+      "vertices": [
+        {
+          "label": "Borrower",
+          "properties": {
+            "borrower_id": "DEMO-BORROWER-002",
+            "display_name": "Synthetic Borrower Beta - Clean",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-002"
+          },
+          "ids": [
+            "DEMO-BORROWER-002"
+          ]
+        },
+        {
+          "label": "Report",
+          "properties": {
+            "report_id": "DEMO-REPORT-002",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "analysis_period": "2026-03",
+            "query_id": "DEMO-REPORT-002"
+          },
+          "ids": [
+            "DEMO-REPORT-002",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "label": "SUBMITTED",
+          "properties": {
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-002"
+          },
+          "from_ids": [
+            "DEMO-BORROWER-002"
+          ],
+          "to_ids": [
+            "DEMO-REPORT-002",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ]
+    },
+    "summary": [
+      {
+        "label": "Transaction Id",
+        "value": "DEMO-REPORT-002"
+      },
+      {
+        "label": "Transaction Date",
+        "value": "2026-04-15T00:00:00Z"
+      },
+      {
+        "label": "Reported Facility Count",
+        "value": 1
+      },
+      {
+        "label": "Active Facility Count",
+        "value": 1
+      },
+      {
+        "label": "Total Outstanding IDR",
+        "value": 5000000
+      },
+      {
+        "label": "Max DPD 24m",
+        "value": 0
+      },
+      {
+        "label": "Worst Collectibility 24m",
+        "value": 1
+      },
+      {
+        "label": "Delinquent Slot Count 24m",
+        "value": 0
+      },
+      {
+        "label": "Delinquency Rate 24m",
+        "value": 0.0
+      },
+      {
+        "label": "Months Since Last Delinquency",
+        "value": null
+      }
+    ]
+  },
+  {
+    "features": {
+      "transaction.id": "DEMO-REPORT-003",
+      "transaction.created": "2026-04-15T00:00:00Z",
+      "borrower.id": "DEMO-BORROWER-003",
+      "borrower.display_name": "Synthetic Borrower Gamma - High Risk",
+      "report.analysis_period": "2026-03",
+      "report.history_start": "2024-04",
+      "report.history_end": "2026-03",
+      "facility.id": [
+        "DEMO-FAC-005",
+        "DEMO-FAC-006"
+      ],
+      "facility.condition": [
+        "ACTIVE",
+        "ACTIVE"
+      ],
+      "facility.outstanding_principal": [
+        20000000,
+        9500000
+      ],
+      "facility.credit_limit": [
+        30000000,
+        10000000
+      ],
+      "facility.collectibility": [
+        3,
+        1
+      ],
+      "facility.days_past_due": [
+        75,
+        0
+      ],
+      "facility.restructuring_count": [
+        1,
+        0
+      ],
+      "facility.credit_start_date": [
+        "2023-03-01",
+        "2026-02-01"
+      ],
+      "facility.lender_code": [
+        "DEMO-LENDER-1",
+        "DEMO-LENDER-2"
+      ],
+      "payment.period": [
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03"
+      ],
+      "payment.collectibility": [
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1
+      ],
+      "payment.days_past_due": [
+        0,
+        0,
+        20,
+        40,
+        70,
+        30,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        25,
+        60,
+        90,
+        75,
+        75,
+        75,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        0
+      ],
+      "payment.observation_status": [
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "REPORTED",
+        "REPORTED"
+      ],
+      "transaction.date": "2026-04-15T00:00:00Z",
+      "reported_facility_count": 2,
+      "active_facility_count": 2,
+      "active_lender_count": 2,
+      "total_outstanding_idr": 29500000,
+      "active_restructured_facility_count": 1,
+      "new_facility_count_3m": 1,
+      "max_dpd_3m": 75,
+      "max_dpd_12m": 90,
+      "max_dpd_24m": 90,
+      "worst_collectibility_3m": 3,
+      "worst_collectibility_12m": 3,
+      "worst_collectibility_24m": 3,
+      "delinquent_slot_count_12m": 6,
+      "delinquent_slot_count_24m": 10,
+      "reported_slot_count_12m": 14,
+      "reported_slot_count_24m": 26,
+      "months_since_last_delinquency": 0,
+      "delinquency_rate_12m": 0.42857142857142855,
+      "delinquency_rate_24m": 0.38461538461538464
+    },
+    "graph": {
+      "vertices": [
+        {
+          "label": "Borrower",
+          "properties": {
+            "borrower_id": "DEMO-BORROWER-003",
+            "display_name": "Synthetic Borrower Gamma - High Risk",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-003"
+          },
+          "ids": [
+            "DEMO-BORROWER-003"
+          ]
+        },
+        {
+          "label": "Report",
+          "properties": {
+            "report_id": "DEMO-REPORT-003",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "analysis_period": "2026-03",
+            "query_id": "DEMO-REPORT-003"
+          },
+          "ids": [
+            "DEMO-REPORT-003",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "label": "SUBMITTED",
+          "properties": {
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-003"
+          },
+          "from_ids": [
+            "DEMO-BORROWER-003"
+          ],
+          "to_ids": [
+            "DEMO-REPORT-003",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ]
+    },
+    "summary": [
+      {
+        "label": "Transaction Id",
+        "value": "DEMO-REPORT-003"
+      },
+      {
+        "label": "Transaction Date",
+        "value": "2026-04-15T00:00:00Z"
+      },
+      {
+        "label": "Reported Facility Count",
+        "value": 2
+      },
+      {
+        "label": "Active Facility Count",
+        "value": 2
+      },
+      {
+        "label": "Total Outstanding IDR",
+        "value": 29500000
+      },
+      {
+        "label": "Max DPD 24m",
+        "value": 90
+      },
+      {
+        "label": "Worst Collectibility 24m",
+        "value": 3
+      },
+      {
+        "label": "Delinquent Slot Count 24m",
+        "value": 10
+      },
+      {
+        "label": "Delinquency Rate 24m",
+        "value": 0.38461538461538464
+      },
+      {
+        "label": "Months Since Last Delinquency",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "features": {
+      "transaction.id": "DEMO-REPORT-004",
+      "transaction.created": "2026-04-15T00:00:00Z",
+      "borrower.id": "DEMO-BORROWER-004",
+      "borrower.display_name": "Synthetic Borrower Delta - Restructured",
+      "report.analysis_period": "2026-03",
+      "report.history_start": "2024-04",
+      "report.history_end": "2026-03",
+      "facility.id": [
+        "DEMO-FAC-007"
+      ],
+      "facility.condition": [
+        "ACTIVE"
+      ],
+      "facility.outstanding_principal": [
+        30000000
+      ],
+      "facility.credit_limit": [
+        50000000
+      ],
+      "facility.collectibility": [
+        1
+      ],
+      "facility.days_past_due": [
+        0
+      ],
+      "facility.restructuring_count": [
+        2
+      ],
+      "facility.credit_start_date": [
+        "2022-01-01"
+      ],
+      "facility.lender_code": [
+        "DEMO-LENDER-3"
+      ],
+      "payment.period": [
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03"
+      ],
+      "payment.collectibility": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "payment.days_past_due": [
+        65,
+        95,
+        95,
+        95,
+        95,
+        95,
+        95,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "payment.observation_status": [
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED"
+      ],
+      "transaction.date": "2026-04-15T00:00:00Z",
+      "reported_facility_count": 1,
+      "active_facility_count": 1,
+      "active_lender_count": 1,
+      "total_outstanding_idr": 30000000,
+      "active_restructured_facility_count": 1,
+      "new_facility_count_3m": 0,
+      "max_dpd_3m": 0,
+      "max_dpd_12m": 0,
+      "max_dpd_24m": 95,
+      "worst_collectibility_3m": 1,
+      "worst_collectibility_12m": 1,
+      "worst_collectibility_24m": 3,
+      "delinquent_slot_count_12m": 0,
+      "delinquent_slot_count_24m": 7,
+      "reported_slot_count_12m": 12,
+      "reported_slot_count_24m": 24,
+      "months_since_last_delinquency": 17,
+      "delinquency_rate_12m": 0.0,
+      "delinquency_rate_24m": 0.2916666666666667
+    },
+    "graph": {
+      "vertices": [
+        {
+          "label": "Borrower",
+          "properties": {
+            "borrower_id": "DEMO-BORROWER-004",
+            "display_name": "Synthetic Borrower Delta - Restructured",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-004"
+          },
+          "ids": [
+            "DEMO-BORROWER-004"
+          ]
+        },
+        {
+          "label": "Report",
+          "properties": {
+            "report_id": "DEMO-REPORT-004",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "analysis_period": "2026-03",
+            "query_id": "DEMO-REPORT-004"
+          },
+          "ids": [
+            "DEMO-REPORT-004",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "label": "SUBMITTED",
+          "properties": {
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-004"
+          },
+          "from_ids": [
+            "DEMO-BORROWER-004"
+          ],
+          "to_ids": [
+            "DEMO-REPORT-004",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ]
+    },
+    "summary": [
+      {
+        "label": "Transaction Id",
+        "value": "DEMO-REPORT-004"
+      },
+      {
+        "label": "Transaction Date",
+        "value": "2026-04-15T00:00:00Z"
+      },
+      {
+        "label": "Reported Facility Count",
+        "value": 1
+      },
+      {
+        "label": "Active Facility Count",
+        "value": 1
+      },
+      {
+        "label": "Total Outstanding IDR",
+        "value": 30000000
+      },
+      {
+        "label": "Max DPD 24m",
+        "value": 95
+      },
+      {
+        "label": "Worst Collectibility 24m",
+        "value": 3
+      },
+      {
+        "label": "Delinquent Slot Count 24m",
+        "value": 7
+      },
+      {
+        "label": "Delinquency Rate 24m",
+        "value": 0.2916666666666667
+      },
+      {
+        "label": "Months Since Last Delinquency",
+        "value": 17
+      }
+    ]
+  },
+  {
+    "features": {
+      "transaction.id": "DEMO-REPORT-005",
+      "transaction.created": "2026-04-15T00:00:00Z",
+      "borrower.id": "DEMO-BORROWER-005",
+      "borrower.display_name": "Synthetic Borrower Epsilon - New",
+      "report.analysis_period": "2026-03",
+      "report.history_start": "2024-04",
+      "report.history_end": "2026-03",
+      "facility.id": [
+        "DEMO-FAC-008"
+      ],
+      "facility.condition": [
+        "ACTIVE"
+      ],
+      "facility.outstanding_principal": [
+        11000000
+      ],
+      "facility.credit_limit": [
+        12000000
+      ],
+      "facility.collectibility": [
+        1
+      ],
+      "facility.days_past_due": [
+        0
+      ],
+      "facility.restructuring_count": [
+        0
+      ],
+      "facility.credit_start_date": [
+        "2026-01-15"
+      ],
+      "facility.lender_code": [
+        "DEMO-LENDER-4"
+      ],
+      "payment.period": [
+        "2024-04",
+        "2024-05",
+        "2024-06",
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03"
+      ],
+      "payment.collectibility": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        1
+      ],
+      "payment.days_past_due": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0
+      ],
+      "payment.observation_status": [
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "NOT_APPLICABLE_BEFORE_OPENING",
+        "REPORTED",
+        "REPORTED",
+        "REPORTED"
+      ],
+      "transaction.date": "2026-04-15T00:00:00Z",
+      "reported_facility_count": 1,
+      "active_facility_count": 1,
+      "active_lender_count": 1,
+      "total_outstanding_idr": 11000000,
+      "active_restructured_facility_count": 0,
+      "new_facility_count_3m": 1,
+      "max_dpd_3m": 0,
+      "max_dpd_12m": 0,
+      "max_dpd_24m": 0,
+      "worst_collectibility_3m": 1,
+      "worst_collectibility_12m": 1,
+      "worst_collectibility_24m": 1,
+      "delinquent_slot_count_12m": 0,
+      "delinquent_slot_count_24m": 0,
+      "reported_slot_count_12m": 3,
+      "reported_slot_count_24m": 3,
+      "months_since_last_delinquency": null,
+      "delinquency_rate_12m": 0.0,
+      "delinquency_rate_24m": 0.0
+    },
+    "graph": {
+      "vertices": [
+        {
+          "label": "Borrower",
+          "properties": {
+            "borrower_id": "DEMO-BORROWER-005",
+            "display_name": "Synthetic Borrower Epsilon - New",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-005"
+          },
+          "ids": [
+            "DEMO-BORROWER-005"
+          ]
+        },
+        {
+          "label": "Report",
+          "properties": {
+            "report_id": "DEMO-REPORT-005",
+            "timestamp": "2026-04-15T00:00:00Z",
+            "analysis_period": "2026-03",
+            "query_id": "DEMO-REPORT-005"
+          },
+          "ids": [
+            "DEMO-REPORT-005",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "label": "SUBMITTED",
+          "properties": {
+            "timestamp": "2026-04-15T00:00:00Z",
+            "query_id": "DEMO-REPORT-005"
+          },
+          "from_ids": [
+            "DEMO-BORROWER-005"
+          ],
+          "to_ids": [
+            "DEMO-REPORT-005",
+            "2026-04-15T00:00:00Z"
+          ]
+        }
+      ]
+    },
+    "summary": [
+      {
+        "label": "Transaction Id",
+        "value": "DEMO-REPORT-005"
+      },
+      {
+        "label": "Transaction Date",
+        "value": "2026-04-15T00:00:00Z"
+      },
+      {
+        "label": "Reported Facility Count",
+        "value": 1
+      },
+      {
+        "label": "Active Facility Count",
+        "value": 1
+      },
+      {
+        "label": "Total Outstanding IDR",
+        "value": 11000000
+      },
+      {
+        "label": "Max DPD 24m",
+        "value": 0
+      },
+      {
+        "label": "Worst Collectibility 24m",
+        "value": 1
+      },
+      {
+        "label": "Delinquent Slot Count 24m",
+        "value": 0
+      },
+      {
+        "label": "Delinquency Rate 24m",
+        "value": 0.0
+      },
+      {
+        "label": "Months Since Last Delinquency",
+        "value": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+#########################################################
+### Boilerplate: transaction date and timestamp
+#########################################################
+# Get transaction date from payload (transaction.created) or current time if null.
+# Normalise to full ISO 8601 datetime (append T00:00:00Z if date-only).
+- input: [ transaction.created, _today ]
+  output: transaction.date
+  allow-null-args: true
+  encoding:
+    type: expression-encoding
+    expression: |
+      val = in.$1
+      if val == nil then val = in.$2 end
+      if val ~= nil and string.len(val) == 10 then
+        val = val .. "T00:00:00Z"
+      end
+      out.$1 = val
+- input: transaction.date
+  output: transaction.ts
+  visible: false
+  encoding:
+    type: date-conversion-encoding
+    input-format: ISO_8601
+    output-format: UNIX_TIMESTAMP_MILLIS
+#########################################################
+### End boilerplate
+#########################################################
