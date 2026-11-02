@@ -20,6 +20,11 @@
   input: $.borrower.display_name
   output: borrower.display_name
   type: STRING
+# Optional borrower category for individual/corporate demo filtering and exports
+- dataset: input
+  input: $.borrower.borrower_type
+  output: borrower.type
+  type: STRING
 # Analysis reporting period (e.g. "2026-03")
 - dataset: input
   input: $.analysis_reporting_period
