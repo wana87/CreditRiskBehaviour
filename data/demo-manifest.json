@@ -1,0 +1,63 @@
+{
+  "synthetic_data": true,
+  "report_count": 25,
+  "new_report_count": 20,
+  "borrower_types": {
+    "INDIVIDUAL": 15,
+    "CORPORATE": 10
+  },
+  "facility_count": 78,
+  "payment_slot_count": 1872,
+  "facility_types": {
+    "UNSPECIFIED_ORIGINAL": 8,
+    "MORTGAGE": 4,
+    "AUTO_LOAN": 5,
+    "CREDIT_CARD": 10,
+    "MICRO_BUSINESS_LOAN": 3,
+    "PERSONAL_LOAN": 6,
+    "EDUCATION_LOAN": 1,
+    "SHARIA_HOME_FINANCING": 1,
+    "WORKING_CAPITAL_REVOLVER": 10,
+    "INVESTMENT_TERM_LOAN": 6,
+    "EQUIPMENT_LEASE": 6,
+    "BANK_GUARANTEE": 5,
+    "TRADE_IMPORT_LOAN": 2,
+    "INVOICE_FINANCING": 4,
+    "LETTER_OF_CREDIT": 2,
+    "COMMERCIAL_PROPERTY_LOAN": 3,
+    "PROJECT_FINANCE": 2
+  },
+  "observation_statuses": {
+    "REPORTED": 1167,
+    "NOT_APPLICABLE_BEFORE_OPENING": 635,
+    "NOT_APPLICABLE_AFTER_CLOSURE": 15,
+    "NOT_REPORTED": 6,
+    "NOT_APPLICABLE_NON_FUNDED": 49
+  },
+  "scenarios": {
+    "ORIGINAL_FIXTURE": 5,
+    "CLEAN": 2,
+    "SPORADIC": 1,
+    "RECENT_EARLY": 2,
+    "RECENT_SEVERE": 2,
+    "PERSISTENT": 1,
+    "RECOVERED": 1,
+    "THIN_FILE": 2,
+    "RESTRUCTURED_RECOVERED": 2,
+    "CLOSED_MIX": 2,
+    "REPORTING_GAPS": 1,
+    "SEASONAL": 1,
+    "RESTRUCTURED_STRESS": 1,
+    "FUNDED_AND_CONTINGENT": 1,
+    "WRITE_OFF_AND_GAPS": 1
+  },
+  "analysis_period": "2026-03",
+  "report_available_at": "2026-04-15",
+  "notes": [
+    "All identifiers, names, and financial amounts are fictional.",
+    "All facilities use IDR. No future outcomes or supervised labels are included.",
+    "Contingent guarantees and letters of credit carry zero outstanding principal and separate contingent exposure. Their non-funded history slots are not payment observations.",
+    "New collectibility values use illustrative DPD buckets, not regulatory classification rules.",
+    "The original five cases are retained with added borrower-type metadata."
+  ]
+}
