@@ -20,14 +20,20 @@ def hero():
     </section>''')
 
 
+def borrower_kind(features):
+    value = str(features.get("borrower.type") or "UNSPECIFIED").upper()
+    return value if value in ("INDIVIDUAL", "CORPORATE") else "UNSPECIFIED"
+
+
 def borrower_heading(features):
     name = features.get("borrower.display_name") or "Unnamed borrower"
     initial = escape(str(name).strip()[:1].upper())
     report = escape(str(features.get("transaction.id", "")))
     period = escape(str(features.get("report.analysis_period", "")))
     date = escape(str(features.get("transaction.date", "")))
+    category = {"INDIVIDUAL": "👤 Individual", "CORPORATE": "🏢 Corporate", "UNSPECIFIED": "Borrower type unspecified"}[borrower_kind(features)]
     st.html(f'''<div class="borrower-heading"><div class="borrower-avatar" aria-hidden="true">{initial}</div>
-      <div><h2>{escape(str(name))}</h2><p>{report} &nbsp; · &nbsp; Analysis: {period}<br>Report date: {date}</p></div></div>''')
+      <div><h2>{escape(str(name))}</h2><p><span class="borrower-type">{category}</span> &nbsp; {report} &nbsp; · &nbsp; Analysis: {period}<br>Report date: {date}</p></div></div>''')
 
 
 def observations(features):

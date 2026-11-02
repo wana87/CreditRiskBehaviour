@@ -1,6 +1,6 @@
 # Credit Behaviour Profiler
 
-A Python Streamlit app built around the five supplied YAML configurations and the five synthetic reports in `data/test-data.jsonl`.
+A Python Streamlit app built around the five supplied YAML configurations, expanded to **25 synthetic reports: 15 individuals and 10 companies**, with **78 facilities and 1,872 monthly history slots** in `data/test-data.jsonl`. Twenty reports are new. The original five remain available separately for reproducibility.
 
 ## Run locally
 
@@ -17,6 +17,37 @@ python -m streamlit run app.py
 The bundled demo runs automatically. Select a borrower report to inspect the summary, payment windows, facilities, graph, and complete feature output. You can also upload JSON/JSONL or paste a report, then click **Run profiler**. Export selected/all results as JSON, or the scalar features as CSV.
 
 The refreshed dashboard includes a blue gradient header, icon-led metric cards and tabs, a borrower identity section, historical observation summaries, interactive payment-window comparisons, a monthly timeline, and a facility-exposure chart. Teal identifies months with no overdue days, while amber identifies months with overdue days reported. Colours describe historical observations, not predicted credit ratings.
+
+Use the **All / Individual / Corporate** filter above the report selector. The borrower header identifies the entity type, the overview includes borrower metadata and the synthetic scenario, and the Facilities tab includes product, funding, currency, limits, collateral, contingent exposure, written-off amount, and maturity. Larger outstanding amounts use `m` (million) / `bn` (billion) in the metric card, with the exact IDR amount in its help tooltip and summary table. All-results exports still include the entire batch when a type filter is selected.
+
+## Expanded synthetic dataset
+
+| File | Contents |
+| --- | --- |
+| `data/test-data.jsonl` | Combined demo: 25 reports, loaded by default. |
+| `data/individual-samples.jsonl` | 15 individual reports, ready to upload independently. |
+| `data/corporate-samples.jsonl` | 10 corporate reports, ready to upload independently. |
+| `data/original-test-data.jsonl` | Original five-report input, preserved unchanged. |
+| `data/demo-manifest.json` | Report, facility, product, scenario, and observation-status counts. |
+| `data/demo-results.json` | Regenerated profiler output for all 25 reports. |
+
+The 20 new reports contain 16 product types. Individual examples cover mortgages, vehicle instalments, personal loans, revolving credit cards, micro-business credit, education loans, and sharia home financing. Corporate examples cover working-capital revolvers, investment term loans, equipment leases, invoice finance, commercial property, project finance, funded import trade loans, guarantees, and undrawn letters of credit. Company metadata includes industry, legal form, business scale, incorporation year, and synthetic annual revenue. Individual metadata includes employment type, age band, and synthetic monthly income.
+
+Historical scenarios include clean payments, sporadic and seasonal lateness, recent arrears, persistent arrears, recovered arrears, short histories, restructured/recovered facilities, restructured facilities with recurring arrears, closed/paid facilities, reporting gaps, and a written-off facility. Every facility has 24 calendar slots. Eligibility statuses distinguish before opening, after closure, actual reporting gaps (`NOT_REPORTED`), and non-funded facilities (`NOT_APPLICABLE_NON_FUNDED`). Only `REPORTED` slots enter payment metrics.
+
+All names, identifiers, and amounts are fictional. All amounts use IDR. Guarantees and letters of credit have zero outstanding principal, separate contingent exposure, and no reported payment observations. Contingent exposure and written-off amounts do not enter `total_outstanding_idr`. The original eight facilities retain their unspecified product types rather than receiving invented classifications. In the combined demo, the original five borrowers receive explicit `INDIVIDUAL` metadata for categorization. Their original facility histories and financial values remain intact.
+
+Collectibility buckets on the new reports are illustrative ordered values, not regulatory classification rules. Scenario descriptions are demonstration metadata, not supervised labels. The new borrower and facility metadata do not become predictive model inputs automatically. The YAML feature formulas and the 19 derived features remain unchanged; the input mapping adds optional `borrower.type` metadata for filtering and export.
+
+The demo deliberately keeps the original analysis period of March 2026 and report availability of 15 April 2026. It does not contain future outcome labels or additional decision-time cohorts. The previously delivered presentation's EDA refers to the preserved original five-report dataset, not the expanded 25-report dataset.
+
+Regenerate the expanded input and manifests deterministically:
+
+```bash
+python generate_demo_data.py
+```
+
+The generator reads the preserved original fixture and does not use external data or random personal identifiers. To refresh `demo-results.json` after changing generator scenarios, profile each report with `engine.profile` as in the example below.
 
 ## Deploy to Streamlit Community Cloud
 
@@ -58,12 +89,12 @@ Edit the repository's YAML files and restart/redeploy to modify the pipeline. Co
 ## Verify
 
 ```bash
-python -m unittest -v test_engine.py test_app.py
+python -m unittest -v test_engine.py test_app.py test_demo_data.py
 ```
 
-Tests compare all five supplied reports against independent Python reference calculations and check empty histories, missing fields, month boundaries, date normalization, JSON formats, graph/summary output, and restricted expression execution. Original-engine expected output was not supplied, so these tests establish agreement with the supplied formulas rather than parity with an external engine.
+Tests compare all 25 reports against independent Python reference calculations and check empty histories, missing fields, month boundaries, date normalization, JSON formats, graph/summary output, and restricted expression execution. Dataset tests verify entity mix, identifiers, product coverage, reporting chronology, exposure consistency, original-fixture preservation, split datasets, and metadata exports. Original-engine expected output was not supplied, so these tests establish agreement with the supplied formulas rather than parity with an external engine.
 
-All 11 tests passed on Python 3.12.14 with the pinned dependencies in `requirements.txt`. The UI tests render the five demo reports, switch between them, process pasted JSON, and check validation feedback. A browser preview was also checked locally. Generated outputs for the supplied data are included in `data/demo-results.json`.
+The UI tests render all 25 demo reports, switch between them, exercise individual/corporate filtering, process pasted JSON, and check validation feedback. Generated outputs for the combined data are included in `data/demo-results.json`.
 
 `app.py` orchestrates the UI, `ui.py` provides presentation helpers and interactive charts, and `styles.css` plus `.streamlit/config.toml` define the visual theme. `engine.py` remains independent of presentation and can also be imported directly:
 

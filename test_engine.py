@@ -58,8 +58,8 @@ class EngineTests(unittest.TestCase):
             with self.subTest(feature=key):
                 self.assertEqual(actual[key], value)
 
-    def test_all_five_reports_against_independent_calculation(self):
-        self.assertEqual(len(self.records), 5)
+    def test_all_reports_against_independent_calculation(self):
+        self.assertEqual(len(self.records), 25)
         for record in self.records:
             with self.subTest(report=record["transaction"]["id"]):
                 self.assert_reference(record)

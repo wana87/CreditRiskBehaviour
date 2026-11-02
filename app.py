@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from engine import CONFIG_FILES, PipelineError, load_config, parse_records, profile
-from ui import apply_styles, borrower_heading, hero, monthly_chart, observations, window_chart
+from ui import apply_styles, borrower_heading, borrower_kind, hero, monthly_chart, observations, window_chart
 
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title="Credit Behaviour Profiler", page_icon="📊", layout="wide")
@@ -19,6 +19,16 @@ def format_value(value):
     if isinstance(value, float):
         return f"{value:,.4f}".rstrip("0").rstrip(".")
     return f"{value:,}" if isinstance(value, int) else str(value)
+
+
+def format_exposure(value):
+    if value is None:
+        return "N/A"
+    if abs(value) >= 1_000_000_000:
+        return f"Rp{value / 1_000_000_000:,.2f}bn"
+    if abs(value) >= 1_000_000:
+        return f"Rp{value / 1_000_000:,.2f}m"
+    return f"Rp{value:,.0f}"
 
 
 def run_batch(text, config):
@@ -49,7 +59,8 @@ def main():
         text = ""
         if mode == "Bundled demo":
             text = (ROOT / "data" / "test-data.jsonl").read_text(encoding="utf-8")
-            st.info("Explore five synthetic borrower reports. Select a borrower in the main workspace.", icon=":material/science:")
+            demo_count = sum(bool(line.strip()) for line in text.splitlines())
+            st.info(f"Explore {demo_count} synthetic reports covering individual and corporate borrowers.", icon=":material/science:")
         elif mode == "Upload JSON / JSONL":
             uploaded = st.file_uploader("Choose report data", type=["json", "jsonl", "ndjson"])
             if uploaded is not None:
@@ -85,6 +96,9 @@ def main():
         st.subheader("Workspace snapshot", icon=":material/dashboard:")
         st.html(f'<div class="mini-summary"><div><strong>{len(batch["results"])}</strong><span>Reports processed</span></div>'
                 f'<div><strong>{len(batch["errors"])}</strong><span>Report errors</span></div></div>')
+        individuals = sum(borrower_kind(e["result"]["features"]) == "INDIVIDUAL" for e in batch["results"])
+        corporates = sum(borrower_kind(e["result"]["features"]) == "CORPORATE" for e in batch["results"])
+        st.caption(f"👤 {individuals} individual · 🏢 {corporates} corporate")
         st.caption("Historical profiling • No predictive credit score")
     if batch["errors"]:
         st.warning(f"{len(batch['errors'])} of {batch['total']} report(s) could not be processed.")
@@ -93,11 +107,19 @@ def main():
         return
     st.caption(f"✓ {len(batch['results'])} of {batch['total']} reports ready to explore")
     with st.container(key="borrower-select"):
-        selected = st.selectbox("Select borrower report", range(len(batch["results"])),
+        category = st.radio("Borrower type", ["All", "Individual", "Corporate"], horizontal=True,
+                            key="borrower-type-filter")
+        entries = [e for e in batch["results"] if category == "All" or
+                   borrower_kind(e["result"]["features"]) == category.upper()]
+        if not entries:
+            st.info("No reports match this borrower type. Select All or load another dataset.")
+            return
+        selected = st.selectbox("Select borrower report", range(len(entries)),
             format_func=lambda i: " · ".join(str(x) for x in (
-                batch["results"][i]["result"]["features"].get("borrower.display_name") or "Unnamed borrower",
-                batch["results"][i]["result"]["features"].get("transaction.id"))))
-    entry = batch["results"][selected]
+                {"INDIVIDUAL": "👤 Individual", "CORPORATE": "🏢 Corporate", "UNSPECIFIED": "Borrower"}[borrower_kind(entries[i]["result"]["features"])],
+                entries[i]["result"]["features"].get("borrower.display_name") or "Unnamed borrower",
+                entries[i]["result"]["features"].get("transaction.id"))))
+    entry = entries[selected]
     result, record = entry["result"], entry["input"]
     features = result["features"]
     borrower_heading(features)
@@ -111,8 +133,10 @@ def main():
         ]):
             with col:
                 with st.container(key=f"kpi-{slug}"):
-                    st.metric(label, format_value(features.get(key)), icon=f":material/{icon}:",
-                              border=True, help=help_text)
+                    value = features.get(key)
+                    money = key == "total_outstanding_idr"
+                    st.metric(label, format_exposure(value) if money else format_value(value), icon=f":material/{icon}:",
+                              border=True, help=help_text + (f" Exact value: IDR {format_value(value)}." if money else ""))
 
     summary, windows, facilities, graph, raw, settings = st.tabs(
         ["📊 Overview", "📅 Payment history", "🏦 Facilities", "🔗 Graph", "📥 Features & export", "⚙️ Configuration"])
@@ -132,6 +156,14 @@ def main():
         st.dataframe([{"Metric": item["label"], "Value": format_value(item["value"])}
                       for item in result["summary"]], hide_index=True, width="stretch")
         st.caption("N/A means no applicable value. A zero delinquency rate requires reported payment slots.")
+        with st.expander("Borrower details and demo scenario", icon=":material/person_search:"):
+            borrower = record.get("borrower") or {}
+            metadata = [{"Attribute": key.replace("_", " ").title(), "Value": format_value(value)}
+                        for key, value in borrower.items()]
+            st.dataframe(metadata, hide_index=True, width="stretch")
+            if record.get("demo_scenario"):
+                st.write(record["demo_scenario"])
+                st.caption("Scenario descriptions identify synthetic historical patterns, not future outcome labels.")
     with windows:
         st.subheader("Payment history windows", icon=":material/date_range:")
         window_rows = [{
@@ -174,16 +206,28 @@ def main():
         for facility in record.get("facilities") or []:
             pos = facility.get("latest_position") or {}
             rows.append({"Facility": facility.get("facility_id"),
+                         "Product type": facility.get("facility_type_normalized") or "Unspecified",
+                         "Funding": facility.get("funding_type") or "Unspecified",
                          "Lender": (facility.get("reporting_institution") or {}).get("code"),
                          "Condition": pos.get("condition_normalized"),
+                         "Currency": facility.get("currency"),
                          "Outstanding IDR": pos.get("outstanding_principal"),
+                         "Credit limit IDR": pos.get("credit_limit"),
+                         "Contingent exposure IDR": pos.get("contingent_exposure_idr"),
+                         "Written-off amount IDR": pos.get("written_off_amount_idr"),
+                         "Collateral": (facility.get("collateral") or {}).get("type"),
                          "DPD": pos.get("days_past_due"), "Collectibility": pos.get("collectibility"),
                          "Restructures": pos.get("restructuring_count"),
-                         "Start date": facility.get("credit_start_date")})
+                         "Start date": facility.get("credit_start_date"),
+                         "Maturity": facility.get("maturity_date")})
         if rows:
             st.dataframe(rows, hide_index=True, width="stretch", column_config={
                 "Outstanding IDR": st.column_config.NumberColumn("Outstanding IDR", format="localized"),
+                "Credit limit IDR": st.column_config.NumberColumn("Credit limit IDR", format="localized"),
+                "Contingent exposure IDR": st.column_config.NumberColumn("Contingent exposure IDR", format="localized"),
+                "Written-off amount IDR": st.column_config.NumberColumn("Written-off amount IDR", format="localized"),
             })
+            st.caption("Scroll horizontally for product, funding, collateral, limit, and maturity details. Contingent exposure and written-off amounts are separate from outstanding principal.")
             exposure = pd.DataFrame(rows)[["Facility", "Outstanding IDR"]]
             if exposure["Outstanding IDR"].notna().any():
                 st.subheader("Exposure by facility", icon=":material/payments:")
@@ -217,6 +261,7 @@ def main():
         st.dataframe([{"Feature": name, "Value": format_value(features.get(name))}
                       for name in feature_names], hide_index=True, width="stretch")
         st.subheader("Export workspace", icon=":material/download:")
+        st.caption("Selected result exports the displayed borrower. All-results JSON and feature CSV include the entire processed batch, regardless of the borrower-type filter.")
         st.download_button("Download selected result · JSON", json.dumps(result, indent=2, allow_nan=False),
                            "profile-result.json", "application/json", icon=":material/person:")
         export = {"results": [{"input_index": e["input_index"], **e["result"]} for e in batch["results"]],

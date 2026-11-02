@@ -16,6 +16,7 @@
 .borrower-avatar { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 15px; background: #e7edf9; color: #3152a0; font-size: 1.25rem; font-weight: 800; flex-shrink: 0; }
 .borrower-heading h2 { font-size: 1.22rem; margin: 0 0 .3rem; padding: 0; color: #17345f; line-height: 1.35; }
 .borrower-heading p { color: #63758b; font-size: .8rem; margin: 0; line-height: 1.6; }
+.borrower-type { display: inline-block; color: #3152a0; background: #e8eefb; padding: .15rem .5rem; border-radius: 6px; font-weight: 600; }
 .st-key-kpi-reported [data-testid="stMetric"] { border-top: 3px solid #4266c5; }
 .st-key-kpi-active [data-testid="stMetric"] { border-top: 3px solid #118b8b; }
 .st-key-kpi-outstanding [data-testid="stMetric"] { border-top: 3px solid #7362b8; }
