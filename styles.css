@@ -39,9 +39,26 @@
 .mini-summary strong { display: block; font-size: 1.5rem; color: #17345f; }
 .mini-summary span { font-size: .78rem; color: #60718a; }
 .app-footer { color: #7c8a9e; font-size: .75rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e6ebf2; }
+.bureau-banner { background: #fff; border: 1px solid #dce5f1; border-top: 4px solid #3157b7; border-radius: 14px; padding: 1.6rem 1.8rem; margin: .8rem 0 .3rem; box-shadow: 0 4px 20px #17345f04; }
+.bureau-kicker { color: #47618a; font-size: .74rem; font-weight: 800; letter-spacing: .12em; line-height: 1.8; }
+.bureau-kicker span { display: inline-block; font-size: .63rem; margin-left: .7rem; letter-spacing: .05em; padding: .1rem .5rem; background: #eaf1fb; border-radius: 5px; color: #3157b7; }
+.bureau-banner h2 { font-size: 1.45rem; color: #17345f; padding: .6rem 0 .2rem; margin: 0; line-height: 1.35; }
+.bureau-banner p { color: #536b8b; font-size: .82rem; margin: .3rem 0 .7rem; overflow-wrap: anywhere; }
+.bureau-source-note { color: #65788f; font-size: .82rem; line-height: 1.6; }
+.bureau-panel { background: white; border: 1px solid #dfe7f1; border-radius: 12px; padding: 1.25rem 1.4rem; height: 100%; }
+.bureau-panel h3 { font-size: 1.02rem; padding: 0 0 .65rem; margin: 0; color: #24456e; border-bottom: 1px solid #e7edf5; }
+.bureau-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .15rem 1.3rem; margin: .5rem 0 0; }
+.bureau-field { padding: .65rem 0; border-bottom: 1px solid #f0f3f8; min-width: 0; }
+.bureau-field dt { font-size: .71rem; color: #718197; font-weight: 500; line-height: 1.5; }
+.bureau-field dd { font-size: .81rem; font-weight: 650; color: #203b5d; margin: .2rem 0 0; line-height: 1.5; overflow-wrap: anywhere; }
+.bureau-legend { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .8rem; }
+.bureau-legend span { padding: .25rem .6rem; border-radius: 5px; font-size: .72rem; color: #334e68; border: 1px solid #e2e8f0; }
+.history-clear { background: #edf8f4; }.history-overdue { background: #fff6e6; }.history-gap { background: #fff0f1; }.history-na { background: #f0f3f7; }
 @media (max-width: 640px) {
   .stMainBlockContainer { padding-top: 4.25rem; }
   .profile-hero { padding: 1.5rem; border-radius: 16px; }
   .hero-pills { gap: .35rem; }
   .borrower-heading h2 { font-size: 1.05rem; }
+  .bureau-panel { padding: 1rem; }
+  .bureau-fields { grid-template-columns: 1fr; }
 }

@@ -14,7 +14,15 @@ python -m pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
-The bundled demo runs automatically. Select a borrower report to inspect the summary, payment windows, facilities, graph, and complete feature output. You can also upload JSON/JSONL or paste a report, then click **Run profiler**. Export selected/all results as JSON, or the scalar features as CSV.
+The bundled demo runs automatically. Select a borrower report to inspect the summary, bureau source report, payment windows, facilities, graph, and complete feature output. You can also upload JSON/JSONL or paste a report, then click **Run profiler**. Export selected/all results as JSON, or the scalar features as CSV.
+
+## Readable bureau report
+
+The **📄 Bureau report** tab presents the selected bundled, uploaded, or pasted source record as a document. Individual profiles show employment, age band, and income when supplied; corporate profiles show legal form, industry, business scale, incorporation year, and revenue. Both include report dates, source identifiers, a facility register, and a facility selector for contract terms, reporting institution, limits, balances, arrears, restructuring, collateral, and payment observations.
+
+This tab reads the input object directly. Absent fields show **Not supplied**, explicit JSON nulls show **Not reported (null)**, and zero/false retain their meaning. Amounts keep their source currency and precision. Every supplied payment-history row remains visible in its original order, including gaps, non-funded slots, and periods outside the profiling windows. Colours describe source reporting status and overdue days.
+
+Download the selected source object as formatted JSON or a standalone HTML report containing **all** facilities and payment histories, plus the complete source JSON. Open the HTML in a browser and use Print to save a PDF. Additional source fields remain accessible in expandable sections. The view uses the supplied synthetic bureau structure; it does not invent fields absent from a report.
 
 The refreshed dashboard includes a blue gradient header, icon-led metric cards and tabs, a borrower identity section, historical observation summaries, interactive payment-window comparisons, a monthly timeline, and a facility-exposure chart. Teal identifies months with no overdue days, while amber identifies months with overdue days reported. Colours describe historical observations, not predicted credit ratings.
 
@@ -51,7 +59,7 @@ The generator reads the preserved original fixture and does not use external dat
 
 ## Deploy to Streamlit Community Cloud
 
-1. Extract the ZIP and upload the entire contents of this project directory to a GitHub repository. Include `app.py`, `ui.py`, `styles.css`, `engine.py`, `requirements.txt`, `.streamlit/`, `config/`, and `data/`. The hidden `.streamlit/` directory supplies the light dashboard theme.
+1. Extract the ZIP and upload the entire contents of this project directory to a GitHub repository. Include `app.py`, `bureau_report.py`, `ui.py`, `styles.css`, `engine.py`, `requirements.txt`, `.streamlit/`, `config/`, and `data/`. The hidden `.streamlit/` directory supplies the light dashboard theme.
 2. In Streamlit Community Cloud, create an app and select that repository and branch.
 3. Set the main file path to `app.py` (or the relative path to it if you used a subfolder).
 4. Under advanced settings, select Python 3.12 and deploy.
@@ -89,12 +97,12 @@ Edit the repository's YAML files and restart/redeploy to modify the pipeline. Co
 ## Verify
 
 ```bash
-python -m unittest -v test_engine.py test_app.py test_demo_data.py
+python -m unittest -v test_engine.py test_app.py test_demo_data.py test_bureau_report.py
 ```
 
 Tests compare all 25 reports against independent Python reference calculations and check empty histories, missing fields, month boundaries, date normalization, JSON formats, graph/summary output, and restricted expression execution. Dataset tests verify entity mix, identifiers, product coverage, reporting chronology, exposure consistency, original-fixture preservation, split datasets, and metadata exports. Original-engine expected output was not supplied, so these tests establish agreement with the supplied formulas rather than parity with an external engine.
 
-The UI tests render all 25 demo reports, switch between them, exercise individual/corporate filtering, process pasted JSON, and check validation feedback. Generated outputs for the combined data are included in `data/demo-results.json`.
+The UI tests render all 25 demo reports, switch between them, exercise individual/corporate filtering and source facility selection, process pasted JSON, and check validation feedback. Source-report tests verify both entity types, source JSON round trips, unchanged input objects, every history row, missing/null/zero distinctions, currency handling, and HTML escaping. Generated outputs for the combined data are included in `data/demo-results.json`.
 
 `app.py` orchestrates the UI, `ui.py` provides presentation helpers and interactive charts, and `styles.css` plus `.streamlit/config.toml` define the visual theme. `engine.py` remains independent of presentation and can also be imported directly:
 

@@ -15,7 +15,8 @@ class AppTests(unittest.TestCase):
         self.assertEqual(len(app.error), 0)
         self.assertEqual(len(app.selectbox[0].options), 25)
         self.assertEqual(len(app.metric), 4)
-        self.assertEqual(len(app.tabs), 6)
+        self.assertEqual(len(app.tabs), 7)
+        self.assertEqual(app.tabs[1].label, "📄 Bureau report")
         for index in range(25):
             app.selectbox[0].select(index).run()
             self.assertEqual(len(app.exception), 0)
@@ -28,6 +29,8 @@ class AppTests(unittest.TestCase):
         self.assertEqual(len(app.selectbox[0].options), 10)
         self.assertTrue(all("Corporate" in label for label in app.selectbox[0].options))
         app.selectbox[0].select(9).run()
+        self.assertEqual(len(app.exception), 0)
+        app.selectbox[1].select(1).run()
         self.assertEqual(len(app.exception), 0)
         app.radio(key="borrower-type-filter").set_value("Individual").run()
         self.assertEqual(len(app.exception), 0)

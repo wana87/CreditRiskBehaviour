@@ -7,6 +7,7 @@ import pandas as pd
 import streamlit as st
 
 from engine import CONFIG_FILES, PipelineError, load_config, parse_records, profile
+from bureau_report import render_bureau_report
 from ui import apply_styles, borrower_heading, borrower_kind, hero, monthly_chart, observations, window_chart
 
 ROOT = Path(__file__).resolve().parent
@@ -138,8 +139,10 @@ def main():
                     st.metric(label, format_exposure(value) if money else format_value(value), icon=f":material/{icon}:",
                               border=True, help=help_text + (f" Exact value: IDR {format_value(value)}." if money else ""))
 
-    summary, windows, facilities, graph, raw, settings = st.tabs(
-        ["📊 Overview", "📅 Payment history", "🏦 Facilities", "🔗 Graph", "📥 Features & export", "⚙️ Configuration"])
+    summary, bureau, windows, facilities, graph, raw, settings = st.tabs(
+        ["📊 Overview", "📄 Bureau report", "📅 Payment history", "🏦 Facilities", "🔗 Graph", "📥 Features & export", "⚙️ Configuration"])
+    with bureau:
+        render_bureau_report(record)
     with summary:
         left, right = st.columns([1.3, 1], gap="large")
         with left:
